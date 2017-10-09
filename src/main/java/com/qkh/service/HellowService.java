@@ -13,7 +13,7 @@ public interface HellowService {
     }
 
     default String getName(){
-        return "s%";
+        return "AAA s%";
     }
 
     void sayGoodBye();
