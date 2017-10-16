@@ -2,6 +2,8 @@ package com.qkh.controller;
 
 
 import com.qkh.service.IService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,8 @@ import java.util.List;
  * @since 2017-10-11
  */
 public class BaseController<T, S extends IService<T, PK>, PK> {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private S s;
@@ -51,14 +55,11 @@ public class BaseController<T, S extends IService<T, PK>, PK> {
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public int update(@PathVariable PK pk, T t){
         try {
-            Method m = t.getClass().getMethod("setId", new Class[]{pk.getClass()});
+            Method m = t.getClass().getMethod("setId", pk.getClass());
             m.invoke(t, pk);
-        } catch (NoSuchMethodException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            logger.error("注入ID失败：" + e.getMessage());
         }
         return s.updateSelective(t);
     }
