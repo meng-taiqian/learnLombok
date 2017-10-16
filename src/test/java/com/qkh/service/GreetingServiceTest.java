@@ -1,6 +1,7 @@
 package com.qkh.service;
 
-import com.qkh.dao.GreetingDao;
+import com.qkh.mapper.GreetingDao;
+import com.qkh.entity.City;
 import com.qkh.entity.MyBean;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,4 +32,6 @@ public class GreetingServiceTest {
         when(dao.greeting()).thenReturn(bean);
         assertNotNull(greetingService.greeting());
     }
+
+
 }

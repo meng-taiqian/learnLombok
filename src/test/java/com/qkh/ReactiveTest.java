@@ -6,6 +6,7 @@ import com.qkh.service.GreetingService;
 import com.qkh.service.HellowService;
 import junit.framework.TestCase;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -104,5 +105,13 @@ public class ReactiveTest extends TestCase{
         greeting.sayHello();
         System.out.println(greeting.getName());
 
+    }
+
+    public void testOpenFile(){
+        try {
+            Runtime.getRuntime().exec("cmd /c start d://develop/code");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

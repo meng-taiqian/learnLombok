@@ -1,4 +1,4 @@
-package com.qkh.dao;
+package com.qkh.mapper;
 
 import com.qkh.entity.MyBean;
 import org.springframework.stereotype.Repository;

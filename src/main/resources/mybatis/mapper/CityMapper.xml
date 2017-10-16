@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qkh.mapper.CityMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.qkh.entity.City">
+        <id column="ID" property="id" />
+        <result column="Name" property="name" />
+        <result column="CountryCode" property="countryCode" />
+        <result column="District" property="district" />
+        <result column="Population" property="population" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ID AS id, Name, CountryCode, District, Population
+    </sql>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM City
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="Integer" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM City
+        WHERE ID = #{_parameter}
+    </select>
+
+    <insert id="insert" parameterType="City" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO City(ID, Name, CountryCode, District, Population)
+        VALUES (#{id}, #{name}, #{countryCode}, #{district}, #{population})
+    </insert>
+
+    <insert id="insertSelective" parameterType="City" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO City(
+        <trim suffixOverrides=",">
+            <if test="id != null and id != ''">ID,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="countryCode != null and countryCode != ''">CountryCode,</if>
+            <if test="district != null and district != ''">district,</if>
+            <if test="population != null and population != ''">population,</if>
+        </trim>
+        ) VALUES (
+          <trim suffixOverrides=",">
+              <if test="id != null and id != ''">#{id},</if>
+              <if test="name != null and name != ''">#{name},</if>
+              <if test="countryCode != null and countryCode != ''">#{countryCode},</if>
+              <if test="district != null and district != ''">#{district},</if>
+              <if test="population != null and population != ''">#{population},</if>
+          </trim>
+        )
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="City">
+        UPDATE City SET
+        <trim suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="countryCode != null and countryCode != ''">CountryCode = #{countryCode},</if>
+            <if test="district != null and district != ''">district = #{district},</if>
+            <if test="population != null and population != ''">population = #{population},</if>
+        </trim>
+        WHERE ID = #{id}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="City">
+        UPDATE City SET name = #{name}, CountryCode = #{countryCode}, district = #{district}, population = #{population}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="Integer">
+      DELETE FROM City WHERE ID = #{_parameter}
+    </delete>
+</mapper>

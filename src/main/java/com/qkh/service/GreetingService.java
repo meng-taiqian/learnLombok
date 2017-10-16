@@ -1,6 +1,6 @@
 package com.qkh.service;
 
-import com.qkh.dao.GreetingDao;
+import com.qkh.mapper.GreetingDao;
 import com.qkh.entity.MyBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
