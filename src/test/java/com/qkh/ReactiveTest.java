@@ -24,6 +24,7 @@ public class ReactiveTest extends TestCase{
     public void testMethodOne(){
         List<Integer> list = prepare(LIST_SIZE);
         int sum = 0;
+		
 //        Observable<Integer> workflow = Observable.fromIterable(list);
 //        Long start1 = System.currentTimeMillis();
 //        workflow.subscribe(System.out :: print);
